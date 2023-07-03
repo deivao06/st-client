@@ -1,6 +1,7 @@
 import {FC} from "react";
 
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 interface Route {
     key: string,
@@ -17,5 +18,12 @@ export const routes: Array<Route> = [
         path: '/login',
         enabled: true,
         component: Login
+    },
+    {
+        key: 'register-route',
+        title: 'Register',
+        path: '/register',
+        enabled: true,
+        component: Register
     },
 ]
