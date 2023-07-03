@@ -1,8 +1,11 @@
-import { Box, Grid, Paper, TextField, Typography, Button } from '@mui/material'
+import React, { useState } from 'react';
+import { Box, Grid, Paper, TextField, Typography, Button} from '@mui/material'
 import { Link } from "react-router-dom";
 import ReplyIcon from '@mui/icons-material/Reply';
 
 function Register() {
+    const [factions, setFactions] = useState([]);
+    
     return (
         <Box className='background' sx={{
             flexGrow: 1,
