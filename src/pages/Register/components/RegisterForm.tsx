@@ -7,15 +7,19 @@ import {
     CircularProgress,
     MenuItem, 
     Chip,
-    Button
+    Button,
+    Stack
 } from '@mui/material'
 import { Link } from "react-router-dom";
 import ReplyIcon from '@mui/icons-material/Reply';
 import { listFactions } from '../../../endpoints/SpaceTraders/Factions';
+import { useForm } from 'react-hook-form';
 
 function RegisterForm() {
+    const { register, handleSubmit, watch, formState: { errors }} = useForm();
     const [factions, setFactions] = useState<any[]>([]);
     const [selectedFaction, setSelectedFaction] = React.useState('');
+    const [symbol, setSymbol] = React.useState('');
 
     useEffect(() => {
         listFactions().then(factions => setFactions(factions));
@@ -40,62 +44,74 @@ function RegisterForm() {
             className='register-form'
             display={'flex'}
             flexDirection={'column'}
-            alignItems={'center'}
-            justifyContent={'space-around'}
+            justifyContent={'center'}
             p={5}
             width={'100%'}
             height={'100%'}
         >
-            <Typography variant="h3" fontWeight={"bold"} alignSelf={"left"} noWrap>REGISTER</Typography>
-            <FormControl fullWidth>
-                <TextField id="symbol" margin='normal' label="Symbol" variant="outlined" />
-                {factions ?
-                    <TextField
-                        id="faction"
-                        value={selectedFaction}
-                        onChange={(event) => setSelectedFaction(event.target.value as string)}
-                        select
-                        label="Faction"
+            <Typography variant="h3" fontWeight={"bold"} alignSelf={"center"} noWrap>REGISTER</Typography>
+            <form action="">
+                <Stack spacing={2} width={'100%'}>
+                    <TextField 
+                        id="symbol"
+                        name="symbol"
+                        margin='normal' 
+                        label="Symbol" 
+                        variant="outlined"
+                        fullWidth
+                        onChange={(event) => setSymbol(event.target.value as string)}
+                    />
+                    {factions ?
+                        <TextField
+                            id="faction"
+                            name="faction"
+                            value={selectedFaction}
+                            onChange={(event) => setSelectedFaction(event.target.value as string)}
+                            select
+                            fullWidth
+                            label="Faction"
+                        >
+                            {factionsMenuItens}
+                        </TextField>
+                        : <CircularProgress color='primary' />
+                    }
+                    <Box
+                        display={'flex'}
+                        flexDirection={'row'}
+                        width={'100%'}
+                        alignItems={'center'}
                     >
-                        {factionsMenuItens}
-                    </TextField>
-                    : <CircularProgress color='primary' />
-                }
-            </FormControl>
-            <Box
-                display={'flex'}
-                flexDirection={'row'}
-                width={'100%'}
-                alignItems={'center'}
-            >
-                <Button
-                    sx={{ 
-                        marginRight: 3,
-                        padding: 1,
-                        borderRadius: 3,
-                        fontWeight: 'bold'
-                    }}
-                    variant="contained"
-                    color="secondary"
-                    component={ Link }
-                    to={'/login'}
-                    >
-                        <ReplyIcon />
-                </Button>
-                <Button 
-                    fullWidth
-                    sx={{ 
-                        padding: 1,
-                        borderRadius: 3,
-                        fontWeight: 'bold'
-                    }}
-                    variant="contained"
-                    color="primary"
-                    >
-                        REGISTER
-                </Button>
-            </Box>
+                        <Button
+                            sx={{ 
+                                marginRight: 3,
+                                padding: 1,
+                                borderRadius: 3,
+                                fontWeight: 'bold'
+                            }}
+                            variant="contained"
+                            color="secondary"
+                            component={ Link }
+                            to={'/login'}
+                            >
+                                <ReplyIcon />
+                        </Button>
+                        <Button 
+                            fullWidth
+                            sx={{ 
+                                padding: 1,
+                                borderRadius: 3,
+                                fontWeight: 'bold'
+                            }}
+                            variant="contained"
+                            color="primary"
+                            >
+                                REGISTER
+                        </Button>
+                    </Box>
+                </Stack>
+            </form>
         </Box>
+            
     )
 }
 
