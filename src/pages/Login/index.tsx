@@ -39,7 +39,7 @@ function Login() {
                             width={'100%'}
                             height={'100%'}
                         >
-                            <Typography variant="h3" padding={3} fontWeight={"bold"} alignSelf={"left"} noWrap>LOGIN</Typography>
+                            <Typography variant="h3" fontWeight={"bold"} alignSelf={"left"} noWrap>LOGIN</Typography>
                             <TextField fullWidth id="token" label="Token" variant="outlined" />
                             <Box
                                 display={'flex'}

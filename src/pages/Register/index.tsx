@@ -12,6 +12,20 @@ function Register() {
         listFactions().then(factions => setFactions(factions));
     }, []);
 
+    const factionsMenuItens = factions.map((faction, index) => (
+        <MenuItem key={index} value={faction.symbol}>
+            <Box
+                display={'flex'}
+                alignItems={'center'}
+                justifyContent={'space-between'}
+                width={'100%'}
+            >
+                {faction.name}
+                <Chip color='primary' label={faction.symbol}></Chip>
+            </Box>
+        </MenuItem>
+    ))
+
     return (
         <Box className='background' sx={{
             flexGrow: 1,
@@ -49,33 +63,21 @@ function Register() {
                             width={'100%'}
                             height={'100%'}
                         >
-                            <Typography variant="h3" padding={3} fontWeight={"bold"} alignSelf={"left"} noWrap>REGISTER</Typography>
+                            <Typography variant="h3" fontWeight={"bold"} alignSelf={"left"} noWrap>REGISTER</Typography>
                             <FormControl fullWidth>
                                 <TextField id="symbol" margin='normal' label="Symbol" variant="outlined" />
-                                <TextField
-                                    id="faction"
-                                    value={selectedFaction}
-                                    onChange={(event) => setSelectedFaction(event.target.value as string)}
-                                    select
-                                    label="Faction"
-                                >
-                                    {factions 
-                                        ? factions.map((faction, index) => (
-                                            <MenuItem key={index} value={faction.symbol}>
-                                                <Box
-                                                    display={'flex'}
-                                                    alignItems={'center'}
-                                                    justifyContent={'space-between'}
-                                                    width={'100%'}
-                                                >
-                                                    {faction.name}
-                                                    <Chip color='primary' label={faction.symbol}></Chip>
-                                                </Box>
-                                            </MenuItem>
-                                        ))
-                                        : <CircularProgress color='primary' />
-                                    }
-                                </TextField>
+                                {factions ?
+                                    <TextField
+                                        id="faction"
+                                        value={selectedFaction}
+                                        onChange={(event) => setSelectedFaction(event.target.value as string)}
+                                        select
+                                        label="Faction"
+                                    >
+                                        {factionsMenuItens}
+                                    </TextField>
+                                    : <CircularProgress color='primary' />
+                                }
                             </FormControl>
                             <Box
                                 display={'flex'}
