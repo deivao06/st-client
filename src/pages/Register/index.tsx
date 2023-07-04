@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
-import { Box, Grid, Paper, TextField, Typography, Button} from '@mui/material'
+import React, { useState, useEffect } from 'react';
+import { Box, Grid, Paper, TextField, Typography, Button, FormControl, MenuItem, Chip, CircularProgress } from '@mui/material'
 import { Link } from "react-router-dom";
 import ReplyIcon from '@mui/icons-material/Reply';
+import { listFactions } from '../../endpoints/SpaceTraders/Factions';
 
 function Register() {
-    const [factions, setFactions] = useState([]);
-    
+    const [factions, setFactions] = useState<any[]>([]);
+    const [selectedFaction, setSelectedFaction] = React.useState('');
+
+    useEffect(() => {
+        listFactions().then(factions => setFactions(factions));
+    }, []);
+
     return (
         <Box className='background' sx={{
             flexGrow: 1,
@@ -44,16 +50,33 @@ function Register() {
                             height={'100%'}
                         >
                             <Typography variant="h3" padding={3} fontWeight={"bold"} alignSelf={"left"} noWrap>REGISTER</Typography>
-                            <Box 
-                                display={'flex'}
-                                flexDirection={'column'}
-                                alignItems={'center'}
-                                justifyContent={'center'}
-                                width={'100%'}
-                            >
-                                <TextField fullWidth id="symbol" margin='normal' label="Symbol" variant="outlined" />
-                                <TextField fullWidth id="faction" margin='normal' label="Faction" variant="outlined" />
-                            </Box>
+                            <FormControl fullWidth>
+                                <TextField id="symbol" margin='normal' label="Symbol" variant="outlined" />
+                                <TextField
+                                    id="faction"
+                                    value={selectedFaction}
+                                    onChange={(event) => setSelectedFaction(event.target.value as string)}
+                                    select
+                                    label="Faction"
+                                >
+                                    {factions 
+                                        ? factions.map((faction, index) => (
+                                            <MenuItem key={index} value={faction.symbol}>
+                                                <Box
+                                                    display={'flex'}
+                                                    alignItems={'center'}
+                                                    justifyContent={'space-between'}
+                                                    width={'100%'}
+                                                >
+                                                    {faction.name}
+                                                    <Chip color='primary' label={faction.symbol}></Chip>
+                                                </Box>
+                                            </MenuItem>
+                                        ))
+                                        : <CircularProgress color='primary' />
+                                    }
+                                </TextField>
+                            </FormControl>
                             <Box
                                 display={'flex'}
                                 flexDirection={'row'}
