@@ -3,6 +3,7 @@ import { Box, Grid, Paper, TextField, Typography, Button, FormControl, MenuItem,
 import { Link } from "react-router-dom";
 import ReplyIcon from '@mui/icons-material/Reply';
 import { listFactions } from '../../endpoints/SpaceTraders/Factions';
+import Background from '../../components/Background';
 
 function Register() {
     const [factions, setFactions] = useState<any[]>([]);
@@ -27,12 +28,7 @@ function Register() {
     ))
 
     return (
-        <Box className='background' sx={{
-            flexGrow: 1,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'
-        }}>
+        <Background>
             <Paper sx={{
                 width: '80%',
                 height: '90%'
@@ -128,12 +124,12 @@ function Register() {
                             alignItems={'center'}
                             justifyContent={'center'}
                         >
-                            <Box component='img' alt='Logo' src='images/logo.png' sx={{maxWidth: '100%'}} />
+                            <Box component='img' alt='Logo' src='images/logo.png' sx={{ maxWidth: '100%' }} />
                         </Box>
                     </Grid>
                 </Grid>
             </Paper>
-        </Box>
+        </Background>
     )
 }
 

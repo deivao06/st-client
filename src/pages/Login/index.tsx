@@ -1,14 +1,10 @@
 import { Box, Grid, Paper, TextField, Typography, Button } from '@mui/material'
 import { Link } from "react-router-dom";
+import Background from '../../components/Background';
 
 function Login() {
     return (
-        <Box className='background' sx={{
-            flexGrow: 1,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'
-        }}>
+        <Background>
             <Paper sx={{
                 width: '80%',
                 height: '90%'
@@ -97,7 +93,7 @@ function Login() {
                     </Grid>
                 </Grid>
             </Paper>
-        </Box>
+        </Background>
     )
 }
 
