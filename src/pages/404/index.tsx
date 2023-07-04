@@ -1,5 +1,5 @@
 import { Box, Grid, Paper, TextField, Typography, Button } from '@mui/material'
-import Background from '../../components/Background'
+import Background from '../../components/Background/Background'
 
 function Page404() {
     return (

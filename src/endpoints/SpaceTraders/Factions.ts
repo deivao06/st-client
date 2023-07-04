@@ -49,8 +49,7 @@ async function listFactions() {
 
         page++;
     }
-
-    console.log(factions);
+    
     return factions;
 }
 
