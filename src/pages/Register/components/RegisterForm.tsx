@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
     Box, 
-    Typography, 
-    FormControl, 
+    Typography,
     TextField,
     CircularProgress,
     MenuItem, 
@@ -13,10 +12,8 @@ import {
 import { Link } from "react-router-dom";
 import ReplyIcon from '@mui/icons-material/Reply';
 import { listFactions } from '../../../endpoints/SpaceTraders/Factions';
-import { useForm } from 'react-hook-form';
 
 function RegisterForm() {
-    const { register, handleSubmit, watch, formState: { errors }} = useForm();
     const [factions, setFactions] = useState<any[]>([]);
     const [selectedFaction, setSelectedFaction] = React.useState('');
     const [symbol, setSymbol] = React.useState('');
